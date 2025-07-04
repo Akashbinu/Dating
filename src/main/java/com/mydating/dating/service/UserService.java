@@ -114,6 +114,26 @@ public class UserService {
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
+	public ResponseEntity<?> searchByName(String letters) {
+		
+		List<User> users = userDao.searchByName("%"+letters+"%");
+		
+		if(users.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Users Found...");
+		}
+		else
+			return ResponseEntity.status(HttpStatus.OK).body(users);
+	}
+
+	public ResponseEntity<?> searchByEmail(String letters) {
+		List<User> users = userDao.searchByEmail("%"+letters+"%");
+		if(users.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Users Found...");
+		}
+		else
+			return ResponseEntity.status(HttpStatus.OK).body(users);
+	}
+
 
 
 }
